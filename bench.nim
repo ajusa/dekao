@@ -3,7 +3,7 @@ import benchy
 let num = 50
 
 import dekao except text
-timeIt "dekao to string":
+timeIt "dekao":
   var a = buildHtml:
     tdiv {"class": "header"}:
       for i in 1..num:
@@ -13,7 +13,7 @@ timeIt "dekao to string":
   keep($a)
 
 import karax/[karaxdsl, vdom]
-timeIt "karax to string":
+timeIt "karax":
   var a = karaxdsl.buildHtml(tdiv(class="header")):
     for i in 1..num:
       li(id="item" & $i):
@@ -22,7 +22,7 @@ timeIt "karax to string":
   keep($a)
 
 import std/htmlgen
-timeIt "htmlgen to string":
+timeIt "htmlgen":
   var list = ""
   for i in 1..num:
     list &= li(id="item" & $i, "some text")
@@ -34,7 +34,7 @@ timeIt "htmlgen to string":
   keep($a)
 
 import nimja
-timeIt "nimja to string":
+timeIt "nimja":
   var result = ""
   compileTemplateStr(
     """
@@ -49,12 +49,12 @@ timeIt "nimja to string":
   keep(result)
 
 include "scf.nimf"
-timeIt "scf to string":
+timeIt "scf":
   var result = scf()
   keep result
 
 import mustache, sequtils
-timeIt "nim-mustache to string":
+timeIt "nim-mustache":
   var c = newContext()
   c["num"] = toSeq(1..num)
   let result = """
