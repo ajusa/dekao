@@ -1,3 +1,4 @@
+import sequtils
 import genit
 
 type Tag* {.pure.} = enum
@@ -47,6 +48,7 @@ type Node* = ref object
 var 
   nodeStack*: seq[Node] # root
   parent*: Node
+  htmlString*: string # as we pop off the stack, we stringify to this for performance
 
 proc toString*(n: Node, result: var string) =
   result.add "<" & $n.tag
@@ -84,22 +86,50 @@ template node(tagName: Tag, attributes: openarray[(string, string)], inner: unty
 
 template text*(s: string): untyped =
   nodeStack[^1].text &= s
+
+type
+  Array[T] = concept a, type A
+    a is array
+    a[A.low] is T
+  OpenArray[T] = Array[T] or seq[T]
+
 include output
 
 # print: gen +Tag:
-#   template `it[0]`*(attrs: openarray[(string, string)] = [], inner: untyped): untyped =
+#   template `it[0]`(attrs: OpenArray[(string, string)] = [], inner: untyped): untyped =
 #     node(Tag.`it[0]`, attrs, inner)
 #
-#   template `it[0]`*(inner: untyped): untyped =
+#   template `it[0]`(inner: untyped): untyped =
 #     node(Tag.`it[0]`, inner)
 #
-#   template `it[0]`*(attrs: varargs[untyped]): untyped =
+#   template `it[0]`(): untyped =
 #     node(Tag.`it[0]`, (discard))
+#
+#   template `it[0]`(attrs: OpenArray[(string, string)]): untyped =
+#     node(Tag.`it[0]`, attrs, (discard))
 
-var a =
-  buildHtml:
-    a:
-      a()
-      a()
+# template buildHtml*(myInner: untyped): Node =
+#   var newNode = Node()
+#   nodeStack.add(newNode)
+#   myInner
+#   nodeStack.pop()
+#
+# template span(attrs: OpenArray[(string, string)], inner: untyped): untyped =
+#   node(Tag.span, attrs, inner)
+#
+# template span(attrs: OpenArray[(string, string)]): untyped =
+#   node(Tag.span, attrs, (discard))
+#
+# template span(inner: untyped): untyped =
+#   node(Tag.span, inner)
+#
+# template span(): untyped =
+#   node(Tag.span, (discard))
+when isMainModule:
+  var a =
+    buildHtml:
+      span {"href": "mysite.com"}:
+        span({"class": "no you"})
+        span()
 
-echo a
+  echo a

@@ -1,0 +1,8 @@
+#? stdtmpl | standard
+#proc scf(): string =
+<div>
+  #for i in 1..num:
+    <li id="item${i}"></li>
+  #end for
+  <span></span>
+</div>
