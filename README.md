@@ -1,2 +1,2 @@
 # dekao
-a fast HTML templating language for Nim
+a slow HTML templating language for Nim

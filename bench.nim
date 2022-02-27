@@ -1,7 +1,9 @@
 import benchy
 
-let num = 50
-
+when defined(release):
+  let num = 500
+else:
+  let num = 50
 import dekao except text
 timeIt "dekao":
   var a = buildHtml:
