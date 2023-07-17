@@ -101,6 +101,7 @@ template h3*(selector = "", inner) = tag selector, "h3", inner
 template h4*(selector = "", inner) = tag selector, "h4", inner
 template h5*(selector = "", inner) = tag selector, "h5", inner
 template h6*(selector = "", inner) = tag selector, "h6", inner
+template hgroup*(selector = "", inner) = tag selector, "hgroup", inner
 template hr*(selector = "", inner) = tag selector, "hr", inner
 template html*(selector = "", inner) = tag selector, "html", inner
 template i*(selector = "", inner) = tag selector, "i", inner
