@@ -1,5 +1,7 @@
 import ../dekao
 
+proc hs*(value: string) = attr "_", value
+
 proc hxBoost*(value: string) = attr "hx-boost", value
 proc hxGet*(value: string) = attr "hx-get", value
 proc hxPost*(value: string) = attr "hx-post", value

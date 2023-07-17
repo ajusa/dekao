@@ -8,8 +8,8 @@ var
   sayStack {.threadvar.}: seq[string]
   attrsStack {.threadvar.}: seq[string]
 
-proc say*(s: string) =
-  sayStack[^1].add(s)
+proc say*(phrases: varargs[string, `$`]) =
+  for s in phrases: sayStack[^1].add(s)
 
 proc parseSelector(selector: string) =
   var
