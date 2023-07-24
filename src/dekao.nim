@@ -140,6 +140,7 @@ template source*(selector = "", inner) = tag selector, "source", inner
 template span*(selector = "", inner) = tag selector, "span", inner
 template strike*(selector = "", inner) = tag selector, "strike", inner
 template strong*(selector = "", inner) = tag selector, "strong", inner
+template tstyle*(selector = "", inner) = tag selector, "style", inner
 template sub*(selector = "", inner) = tag selector, "sub", inner
 template sup*(selector = "", inner) = tag selector, "sup", inner
 template table*(selector = "", inner) = tag selector, "table", inner
@@ -208,6 +209,7 @@ template h3*(inner) = tag "", "h3", inner
 template h4*(inner) = tag "", "h4", inner
 template h5*(inner) = tag "", "h5", inner
 template h6*(inner) = tag "", "h6", inner
+template hgroup*(inner) = tag "", "hgroup", inner
 template hr*(inner) = tag "", "hr", inner
 template html*(inner) = tag "", "html", inner
 template i*(inner) = tag "", "i", inner
@@ -246,6 +248,7 @@ template source*(inner) = tag "", "source", inner
 template span*(inner) = tag "", "span", inner
 template strike*(inner) = tag "", "strike", inner
 template strong*(inner) = tag "", "strong", inner
+template tstyle*(inner) = tag "", "style", inner
 template sub*(inner) = tag "", "sub", inner
 template sup*(inner) = tag "", "sup", inner
 template table*(inner) = tag "", "table", inner
