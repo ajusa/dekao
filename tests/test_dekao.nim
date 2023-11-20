@@ -1,4 +1,4 @@
-import dekao
+import dekao, dekao/vue
 
 block:
   var x = render:
@@ -9,6 +9,12 @@ block:
 block:
   var x = render:
     meta:
-      attrProperty "og:title"
-      attrContent "Right here"
+      property "og:title"
+      content "Right here"
   doAssert x == r"""<meta property="og:title" content="Right here"></meta>"""
+
+
+block:
+  var x = render:
+    tdiv:
+      vModel "{a: 3}"
