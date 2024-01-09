@@ -292,6 +292,8 @@ proc cite*(value: string) = attr "cite", value
 proc class*(value: string) = attr "class", value
 proc cols*(value: string) = attr "cols", value
 proc colspan*(value: string) = attr "colspan", value
+proc tDefer* = attr "defer", ""
+proc init* = attr "init", ""
 proc property*(value: string) = attr "property", value
 proc content*(value: string) = attr "content", value
 proc contenteditable*(value: string) = attr "contenteditable", value
@@ -315,23 +317,6 @@ proc attrHeight*(value: string) = attr "height", value
 proc hidden*(value: string) = attr "hidden", value
 proc high*(value: string) = attr "high", value
 proc href*(value: string) = attr "href", value
-
-proc `x-data`*(value: string) = attr "x-data", value
-proc `x-show`*(value: string) = attr "x-show", value
-proc `@click`*(value: string) = attr "@click", value
-proc `x-trans-es`*(value: string) = attr "x-transition:enter-start", value
-
-proc `asset-id`*(value: string) = attr "asset-id", value
-proc `seller-id`*(value: string) = attr "seller-id", value
-proc `edit-btn`*(value: string) = attr "edit-btn", value
-proc `publish-btn`*(value: string) = attr "publish-btn", value
-proc `delete-btn`*(value: string) = attr "delete-btn", value
-proc `unpublish-btn`*(value: string) = attr "unpublish-btn", value
-
-proc `@mouseover`*(value: string) = attr "@mouseover", value
-proc `@mouseleave`*(value: string) = attr "@mouseleave", value
-
-
 proc hreflang*(value: string) = attr "hreflang", value
 proc httpEquiv*(value: string) = attr "httpEquiv", value
 proc id*(value: string) = attr "id", value
