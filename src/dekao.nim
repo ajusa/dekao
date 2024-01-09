@@ -11,7 +11,7 @@ var
 proc say*(phrases: varargs[string, `$`]) =
   for s in phrases: 
     if sayStack.len == 0:
-      echo s
+      sayStack.add s
     else:
       sayStack[^1].add s
 
