@@ -9,7 +9,11 @@ var
   attrsStack {.threadvar.}: seq[string]
 
 proc say*(phrases: varargs[string, `$`]) =
-  for s in phrases: sayStack[^1].add(s)
+  for s in phrases: 
+    if sayStack.len == 0:
+      sayStack.add s
+    else:
+      sayStack[^1].add s
 
 proc parseSelector(selector: string) =
   var
@@ -48,7 +52,10 @@ template tag*(selector, name: string, inner) =
   inner
   let innerSay = sayStack.pop()
   say "<" & name & attrsStack.pop() & ">"
-  sayStack[^1].add innerSay
+  if sayStack.len > 0:
+    sayStack[^1].add innerSay
+  else:
+    sayStack.add innerSay
   say "</" & name & ">"
 
 template a*(selector = "", inner) = tag selector, "a", inner
