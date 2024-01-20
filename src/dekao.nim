@@ -9,7 +9,7 @@ var
   attrsStack {.threadvar.}: seq[string]
 
 proc say*(phrases: varargs[string, `$`]) =
-  for s in phrases: 
+  for s in phrases:
     if sayStack.len == 0:
       sayStack.add s
     else:
@@ -58,30 +58,36 @@ template tag*(selector, name: string, inner) =
     sayStack.add innerSay
   say "</" & name & ">"
 
+template voidTag*(selector, name: string, inner) =
+  attrsStack.add("")
+  parseSelector(selector)
+  inner
+  say "<" & name & attrsStack.pop() & "/>"
+
 template a*(selector = "", inner) = tag selector, "a", inner
 template abbr*(selector = "", inner) = tag selector, "abbr", inner
 template acronym*(selector = "", inner) = tag selector, "acronym", inner
 template address*(selector = "", inner) = tag selector, "address", inner
 template applet*(selector = "", inner) = tag selector, "applet", inner
-template area*(selector = "", inner) = tag selector, "area", inner
+template area*(selector = "", inner) = voidTag selector, "area", inner
 template article*(selector = "", inner) = tag selector, "article", inner
 template aside*(selector = "", inner) = tag selector, "aside", inner
 template audio*(selector = "", inner) = tag selector, "audio", inner
 template b*(selector = "", inner) = tag selector, "b", inner
-template base*(selector = "", inner) = tag selector, "base", inner
+template base*(selector = "", inner) = voidTag selector, "base", inner
 template basefont*(selector = "", inner) = tag selector, "basefont", inner
 template bdo*(selector = "", inner) = tag selector, "bdo", inner
 template big*(selector = "", inner) = tag selector, "big", inner
 template blockquote*(selector = "", inner) = tag selector, "blockquote", inner
 template body*(selector = "", inner) = tag selector, "body", inner
-template br*(selector = "", inner) = tag selector, "br", inner
+template br*(selector = "", inner) = voidTag selector, "br", inner
 template button*(selector = "", inner) = tag selector, "button", inner
 template canvas*(selector = "", inner) = tag selector, "canvas", inner
 template caption*(selector = "", inner) = tag selector, "caption", inner
 template center*(selector = "", inner) = tag selector, "center", inner
 template cite*(selector = "", inner) = tag selector, "cite", inner
 template code*(selector = "", inner) = tag selector, "code", inner
-template col*(selector = "", inner) = tag selector, "col", inner
+template col*(selector = "", inner) = voidTag selector, "col", inner
 template colgroup*(selector = "", inner) = tag selector, "colgroup", inner
 template datalist*(selector = "", inner) = tag selector, "datalist", inner
 template dd*(selector = "", inner) = tag selector, "dd", inner
@@ -91,7 +97,7 @@ template tdiv*(selector = "", inner) = tag selector, "div", inner
 template dl*(selector = "", inner) = tag selector, "dl", inner
 template dt*(selector = "", inner) = tag selector, "dt", inner
 template em*(selector = "", inner) = tag selector, "em", inner
-template embed*(selector = "", inner) = tag selector, "embed", inner
+template embed*(selector = "", inner) = voidTag selector, "embed", inner
 template fieldset*(selector = "", inner) = tag selector, "fieldset", inner
 template figcaption*(selector = "", inner) = tag selector, "figcaption", inner
 template figure*(selector = "", inner) = tag selector, "figure", inner
@@ -109,22 +115,22 @@ template h4*(selector = "", inner) = tag selector, "h4", inner
 template h5*(selector = "", inner) = tag selector, "h5", inner
 template h6*(selector = "", inner) = tag selector, "h6", inner
 template hgroup*(selector = "", inner) = tag selector, "hgroup", inner
-template hr*(selector = "", inner) = tag selector, "hr", inner
+template hr*(selector = "", inner) = voidTag selector, "hr", inner
 template html*(selector = "", inner) = tag selector, "html", inner
 template i*(selector = "", inner) = tag selector, "i", inner
 template iframe*(selector = "", inner) = tag selector, "iframe", inner
-template img*(selector = "", inner) = tag selector, "img", inner
-template input*(selector = "", inner) = tag selector, "input", inner
+template img*(selector = "", inner) = voidTag selector, "img", inner
+template input*(selector = "", inner) = voidTag selector, "input", inner
 template ins*(selector = "", inner) = tag selector, "ins", inner
 template kbd*(selector = "", inner) = tag selector, "kbd", inner
 template label*(selector = "", inner) = tag selector, "label", inner
 template legend*(selector = "", inner) = tag selector, "legend", inner
 template li*(selector = "", inner) = tag selector, "li", inner
-template link*(selector = "", inner) = tag selector, "link", inner
+template link*(selector = "", inner) = voidTag selector, "link", inner
 template main*(selector = "", inner) = tag selector, "main", inner
 template map*(selector = "", inner) = tag selector, "map", inner
 template mark*(selector = "", inner) = tag selector, "mark", inner
-template meta*(selector = "", inner) = tag selector, "meta", inner
+template meta*(selector = "", inner) = voidTag selector, "meta", inner
 template meter*(selector = "", inner) = tag selector, "meter", inner
 template nav*(selector = "", inner) = tag selector, "nav", inner
 template noscript*(selector = "", inner) = tag selector, "noscript", inner
@@ -133,7 +139,7 @@ template ol*(selector = "", inner) = tag selector, "ol", inner
 template optgroup*(selector = "", inner) = tag selector, "optgroup", inner
 template option*(selector = "", inner) = tag selector, "option", inner
 template p*(selector = "", inner) = tag selector, "p", inner
-template param*(selector = "", inner) = tag selector, "param", inner
+template param*(selector = "", inner) = voidTag selector, "param", inner
 template pre*(selector = "", inner) = tag selector, "pre", inner
 template progress*(selector = "", inner) = tag selector, "progress", inner
 template q*(selector = "", inner) = tag selector, "q", inner
@@ -143,7 +149,7 @@ template script*(selector = "", inner) = tag selector, "script", inner
 template section*(selector = "", inner) = tag selector, "section", inner
 template select*(selector = "", inner) = tag selector, "select", inner
 template small*(selector = "", inner) = tag selector, "small", inner
-template source*(selector = "", inner) = tag selector, "source", inner
+template source*(selector = "", inner) = voidTag selector, "source", inner
 template span*(selector = "", inner) = tag selector, "span", inner
 template strike*(selector = "", inner) = tag selector, "strike", inner
 template strong*(selector = "", inner) = tag selector, "strong", inner
@@ -164,32 +170,32 @@ template u*(selector = "", inner) = tag selector, "u", inner
 template ul*(selector = "", inner) = tag selector, "ul", inner
 template tvar*(selector = "", inner) = tag selector, "var", inner
 template video*(selector = "", inner) = tag selector, "video", inner
-template wbr*(selector = "", inner) = tag selector, "wbr", inner
+template wbr*(selector = "", inner) = voidTag selector, "wbr", inner
 
 template a*(inner) = tag "", "a", inner
 template abbr*(inner) = tag "", "abbr", inner
 template acronym*(inner) = tag "", "acronym", inner
 template address*(inner) = tag "", "address", inner
 template applet*(inner) = tag "", "applet", inner
-template area*(inner) = tag "", "area", inner
+template area*(inner) = voidTag "", "area", inner
 template article*(inner) = tag "", "article", inner
 template aside*(inner) = tag "", "aside", inner
 template audio*(inner) = tag "", "audio", inner
 template b*(inner) = tag "", "b", inner
-template base*(inner) = tag "", "base", inner
+template base*(inner) = voidTag "", "base", inner
 template basefont*(inner) = tag "", "basefont", inner
 template bdo*(inner) = tag "", "bdo", inner
 template big*(inner) = tag "", "big", inner
 template blockquote*(inner) = tag "", "blockquote", inner
 template body*(inner) = tag "", "body", inner
-template br*(inner) = tag "", "br", inner
+template br*(inner) = voidTag "", "br", inner
 template button*(inner) = tag "", "button", inner
 template canvas*(inner) = tag "", "canvas", inner
 template caption*(inner) = tag "", "caption", inner
 template center*(inner) = tag "", "center", inner
 template cite*(inner) = tag "", "cite", inner
 template code*(inner) = tag "", "code", inner
-template col*(inner) = tag "", "col", inner
+template col*(inner) = voidTag "", "col", inner
 template colgroup*(inner) = tag "", "colgroup", inner
 template datalist*(inner) = tag "", "datalist", inner
 template dd*(inner) = tag "", "dd", inner
@@ -199,7 +205,7 @@ template tdiv*(inner) = tag "", "div", inner
 template dl*(inner) = tag "", "dl", inner
 template dt*(inner) = tag "", "dt", inner
 template em*(inner) = tag "", "em", inner
-template embed*(inner) = tag "", "embed", inner
+template embed*(inner) = voidTag "", "embed", inner
 template fieldset*(inner) = tag "", "fieldset", inner
 template figcaption*(inner) = tag "", "figcaption", inner
 template figure*(inner) = tag "", "figure", inner
@@ -217,22 +223,22 @@ template h4*(inner) = tag "", "h4", inner
 template h5*(inner) = tag "", "h5", inner
 template h6*(inner) = tag "", "h6", inner
 template hgroup*(inner) = tag "", "hgroup", inner
-template hr*(inner) = tag "", "hr", inner
+template hr*(inner) = voidTag "", "hr", inner
 template html*(inner) = tag "", "html", inner
 template i*(inner) = tag "", "i", inner
 template iframe*(inner) = tag "", "iframe", inner
-template img*(inner) = tag "", "img", inner
-template input*(inner) = tag "", "input", inner
+template img*(inner) = voidTag "", "img", inner
+template input*(inner) = voidTag "", "input", inner
 template ins*(inner) = tag "", "ins", inner
 template kbd*(inner) = tag "", "kbd", inner
 template label*(inner) = tag "", "label", inner
 template legend*(inner) = tag "", "legend", inner
 template li*(inner) = tag "", "li", inner
-template link*(inner) = tag "", "link", inner
+template link*(inner) = voidTag "", "link", inner
 template main*(inner) = tag "", "main", inner
 template map*(inner) = tag "", "map", inner
 template mark*(inner) = tag "", "mark", inner
-template meta*(inner) = tag "", "meta", inner
+template meta*(inner) = voidTag "", "meta", inner
 template meter*(inner) = tag "", "meter", inner
 template nav*(inner) = tag "", "nav", inner
 template noscript*(inner) = tag "", "noscript", inner
@@ -241,7 +247,7 @@ template ol*(inner) = tag "", "ol", inner
 template optgroup*(inner) = tag "", "optgroup", inner
 template option*(inner) = tag "", "option", inner
 template p*(inner) = tag "", "p", inner
-template param*(inner) = tag "", "param", inner
+template param*(inner) = voidTag "", "param", inner
 template pre*(inner) = tag "", "pre", inner
 template progress*(inner) = tag "", "progress", inner
 template q*(inner) = tag "", "q", inner
@@ -251,7 +257,7 @@ template script*(inner) = tag "", "script", inner
 template section*(inner) = tag "", "section", inner
 template select*(inner) = tag "", "select", inner
 template small*(inner) = tag "", "small", inner
-template source*(inner) = tag "", "source", inner
+template source*(inner) = voidTag "", "source", inner
 template span*(inner) = tag "", "span", inner
 template strike*(inner) = tag "", "strike", inner
 template strong*(inner) = tag "", "strong", inner
@@ -272,7 +278,7 @@ template u*(inner) = tag "", "u", inner
 template ul*(inner) = tag "", "ul", inner
 template tvar*(inner) = tag "", "var", inner
 template video*(inner) = tag "", "video", inner
-template wbr*(inner) = tag "", "wbr", inner
+template wbr*(inner) = voidTag "", "wbr", inner
 
 proc attr*(name, value: string) =
   attrsStack[^1].add " " & name & "=\"" & value & "\""
