@@ -1,4 +1,4 @@
-version     = "0.0.2"
+version     = "0.0.4"
 author      = "ajusa"
 description = "HTML templating language"
 license     = "MIT"
