@@ -6,6 +6,7 @@ proc vEffect*(value: string) = attr "v-effect", value
 proc vBind*(value: string) = attr "v-bind", value
 proc vOn*(value: string) = attr "v-on", value
 proc vModel*(value: string) = attr "v-model", value
+proc vModel*(modifier: string, value: string) = attr "v-model." & modifier, value
 proc vIf*(value: string) = attr "v-if", value
 proc vElse*(value: string) = attr "v-else", value
 proc vElseIf*(value: string) = attr "v-else-if", value
