@@ -294,6 +294,8 @@ proc autofocus*(value: string) = attr "autofocus", value
 proc autoplay*(value: string) = attr "autoplay", value
 proc charset*(value: string) = attr "charset", value
 proc checked*(value: string) = attr "checked", value
+proc checked*(value: bool) = 
+  if value: attr "checked", ""
 proc cite*(value: string) = attr "cite", value
 proc class*(value: string) = attr "class", value
 proc cols*(value: string) = attr "cols", value
@@ -359,6 +361,8 @@ proc rowspan*(value: string) = attr "rowspan", value
 proc sandbox*(value: string) = attr "sandbox", value
 proc scope*(value: string) = attr "scope", value
 proc selected*(value: string) = attr "selected", value
+proc selected*(value: bool) = 
+  if value: attr "selected", ""
 proc shape*(value: string) = attr "shape", value
 proc size*(value: string) = attr "size", value
 proc sizes*(value: string) = attr "sizes", value
