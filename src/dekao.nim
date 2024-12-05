@@ -64,6 +64,9 @@ template voidTag*(selector, name: string, inner) =
   inner
   say "<" & name & attrsStack.pop() & "/>"
 
+template tag*(name: string, inner) = tag "", name, inner
+template voidTag*(name: string, inner) = voidTag "", name, inner
+
 template a*(selector = "", inner) = tag selector, "a", inner
 template abbr*(selector = "", inner) = tag selector, "abbr", inner
 template acronym*(selector = "", inner) = tag selector, "acronym", inner
